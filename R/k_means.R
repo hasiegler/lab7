@@ -68,7 +68,6 @@ k_means <- function(dat, k, pca = FALSE) {
 
     list <- list('Clustering vector' = cluster_vec, 'SSTO' = SSTO)
     return(list)
-
 }
 
 
