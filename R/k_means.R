@@ -8,7 +8,14 @@
 #' @import dplyr
 #'
 #' @export
-k_means <- function(dat, k) {
+k_means <- function(dat, k, pca = FALSE) {
+
+    if(pca == TRUE){
+        dat = princomp(dat)
+        dat = dat$scores %>%
+            as.data.frame() %>%
+            dplyr::select(Comp.1, Comp.2)
+    }
 
     rand <- sample(1:nrow(dat), k)
 
@@ -67,9 +74,10 @@ k_means <- function(dat, k) {
 
     }
 
-    list <- list(cluster_vec, total[1])
+    list <- list('Clustering vector' = cluster_vec, 'SSTO' = total[1])
     return(list)
 
 }
+
 
 
