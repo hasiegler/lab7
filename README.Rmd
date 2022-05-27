@@ -49,7 +49,7 @@ k_means(iris2, k = 3)
 ```
 The output of the k_means function returns the cluster assignment for each of the observations, as well as the total sum of squares.
 
-__How well did the cluster assignment work?__
+__How well did the cluster assignments work?__
 
 
 ```{r}
@@ -71,29 +71,34 @@ The cluster assignments are based on all the numeric variables in the iris datas
 
 ### hier_clust
 
-The function hier_clust takes a dataframe of numeric variables and a number of clusters to stop at as arguments.
+The function hier_clust() takes a dataframe and a number of clusters to stop at and return the cluster assignments for as arguments.
 
 ```{r}
-iris3 <- iris %>% 
-    select(-Species)
-
-iris3 <- iris3[1:20,]
-
-set.seed(60)
-hier_clust(iris3, 3)
+our_clusters <- hier_clust(mtcars, 2)
+our_clusters
 ```
 The output of the function is a vector of cluster assignments.
 
-```{r}
-set.seed(60)
-results <- hier_clust(iris3, 3)
-iris_graph_data <- iris3 %>% 
-    cbind(results)
+__Testing the Accuracy of the Clustering__
 
-ggplot(iris_graph_data, aes(x = Petal.Length, 
-                        y = Petal.Width, 
-                        color = as.factor(results))) +
+```{r}
+res <- hclust(dist(mtcars))
+correct_clusters <- cutree(res, 2)
+correct_clusters
+```
+Using the built-in hclust() function, we can see that the cluster assignments returned for 2 clusters for the mtcars dataset are exactly the same.
+
+```{r}
+sum(our_clusters - correct_clusters)
+```
+```{r}
+graph_data <- mtcars %>% 
+    cbind(our_clusters)
+
+ggplot(graph_data, aes(x = hp, 
+                        y = mpg, 
+                        color = as.factor(our_clusters))) +
     geom_point()
 ```
 
-The cluster assignments are based on all the numeric variables in the iris dataset, however we can still see that the cluster assignments were somewhat accurate based on these two variables in the plot. The plot above only shows two of the variables used in the cluster assignments, however we still see that the observations were clustered into 3 groups.
+The cluster assignments are based on all the variables in the mtcars dataset, however we can still see that the cluster assignments were accurate based on these two variables in the plot (hp and mpg). The plot above only shows two of the variables used in the cluster assignments, however we still see that the observations were clustered into 2 groups that are visibly distinct from each other in terms of these 2 variables.
