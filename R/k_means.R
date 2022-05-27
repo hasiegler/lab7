@@ -23,6 +23,7 @@ k_means <- function(dat, k, pca = FALSE) {
 
     cluster_vec <- c()
     last_vec <- c(0)
+    dists <- c()
     iter <- 0
     stop <- 0
 
@@ -39,14 +40,20 @@ k_means <- function(dat, k, pca = FALSE) {
             i_cluster <- dist[1:k] %>%
                 which.min()
 
+            dist <- dist[1:k] %>%
+                min()
+
             cluster_vec[i] <- i_cluster
+
+            dists[i] <- dist
 
         }
 
         if (all(cluster_vec == last_vec)) {
             stop <-  1
-
         }
+
+        SSTO = sum(dists^2)
 
         last_vec <- cluster_vec
 
@@ -59,22 +66,7 @@ k_means <- function(dat, k, pca = FALSE) {
 
     }
 
-    overall <- dat %>%
-        summarize_all(mean)
-
-    total <- 0
-    ss <- c()
-
-    for (i in 1:nrow(dat)) {
-
-        ss <- dat[i,] %>%
-            rbind(overall) %>%
-            dist()
-        total <- total + ss
-
-    }
-
-    list <- list('Clustering vector' = cluster_vec, 'SSTO' = total[1])
+    list <- list('Clustering vector' = cluster_vec, 'SSTO' = SSTO)
     return(list)
 
 }
