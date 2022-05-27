@@ -66,6 +66,33 @@ ggplot(iris_graph_data, aes(x = Petal.Length,
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
+``` r
+kmeans(iris2, 3)
+#> K-means clustering with 3 clusters of sizes 96, 33, 21
+#> 
+#> Cluster means:
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width
+#> 1     6.314583    2.895833     4.973958   1.7031250
+#> 2     5.175758    3.624242     1.472727   0.2727273
+#> 3     4.738095    2.904762     1.790476   0.3523810
+#> 
+#> Clustering vector:
+#>   [1] 2 3 3 3 2 2 2 2 3 3 2 2 3 3 2 2 2 2 2 2 2 2 2 2 3 3 2 2 2 3 3 2 2 2 3 2 2
+#>  [38] 2 3 2 2 3 3 2 2 3 2 3 2 2 1 1 1 1 1 1 1 3 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1
+#>  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1
+#> [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#> [149] 1 1
+#> 
+#> Within cluster sum of squares by cluster:
+#> [1] 118.651875   6.432121  17.669524
+#>  (between_SS / total_SS =  79.0 %)
+#> 
+#> Available components:
+#> 
+#> [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+#> [6] "betweenss"    "size"         "iter"         "ifault"
+```
+
 The cluster assignments are based on all the numeric variables in the
 iris dataset, however we can still see that the cluster assignments were
 accurate based on the plot above. The plot above only shows two of the
@@ -137,7 +164,7 @@ sum(our_clusters - correct_clusters)
 graph_data <- mtcars %>% 
     cbind(our_clusters)
 ggplot(graph_data, aes(x = hp, 
-                        y = mpg, 
+                       y = mpg, 
                         color = as.factor(our_clusters))) +
     geom_point()
 ```
