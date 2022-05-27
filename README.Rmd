@@ -90,7 +90,7 @@ sum(our_clusters - correct_clusters)
 graph_data <- mtcars %>% 
     cbind(our_clusters)
 ggplot(graph_data, aes(x = hp, 
-                        y = mpg, 
+                       y = mpg, 
                         color = as.factor(our_clusters))) +
     geom_point()
 ```
