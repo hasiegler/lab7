@@ -9,7 +9,6 @@
 #'
 #' @export
 k_means <- function(dat, k, pca = FALSE) {
-    names <- rownames(dat)
 
     if(pca == TRUE){
         dat <- princomp(dat)
