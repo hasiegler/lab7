@@ -11,7 +11,6 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-
 library(tidyverse)
 ```
 
@@ -43,11 +42,8 @@ The k_means function takes in a dataframe of numeric variables, so we first remo
 ```{r}
 iris2 <- iris %>% 
     select(-Species)
-
 set.seed(40)
 k_means(iris2, k = 3)
-k <- kmeans(iris2, 3)
-k$tot.withinss
 ```
 The output of the k_means function returns the cluster assignment for each of the observations, as well as the total sum of squares.
 
@@ -55,38 +51,18 @@ __How well did the cluster assignments work?__
 
 
 ```{r}
-# no pca
 set.seed(40)
 results <- k_means(iris2, k = 3)
-
 cluster_vector <- results[[1]]
-
 iris_graph_data <- iris2 %>% 
     cbind(cluster_vector)
-
 ggplot(iris_graph_data, aes(x = Petal.Length, 
                       y = Petal.Width, 
                       color = as.factor(cluster_vector))) +
     geom_point()
 ```
 
-The cluster assignments are based on all the numeric variables in the iris dataset, however we can still see that the cluster assignments were accurate based on the plot above. The plot above only shows two of the variables used in the cluster assignments, however we still see that the observations were clustered into 3 groups correctly.
-
-```{r}
-# with pca
-set.seed(40)
-results <- k_means(iris2, k = 3, pca = T)
-
-cluster_vector <- results[[1]]
-
-iris_graph_data <- iris2 %>% 
-    cbind(cluster_vector)
-
-ggplot(iris_graph_data, aes(x = Petal.Length, 
-                      y = Petal.Width, 
-                      color = as.factor(cluster_vector))) +
-    geom_point()
-```
+The cluster assignments are based on all the numeric variables in the iris dataset, however we can still see that the cluster assignments were accurate based on the plot above. The plot above only shows two of the variables used in the cluster assignments, however we still see that the observations were clustered into 3 groups correctly. 
 
 ### hier_clust
 
@@ -113,7 +89,6 @@ sum(our_clusters - correct_clusters)
 ```{r}
 graph_data <- mtcars %>% 
     cbind(our_clusters)
-
 ggplot(graph_data, aes(x = hp, 
                         y = mpg, 
                         color = as.factor(our_clusters))) +
