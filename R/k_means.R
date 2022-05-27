@@ -11,8 +11,8 @@
 k_means <- function(dat, k, pca = FALSE) {
 
     if(pca == TRUE){
-        dat = princomp(dat)
-        dat = dat$scores %>%
+        dat <- princomp(dat)
+        dat <- dat$scores %>%
             as.data.frame() %>%
             select(Comp.1, Comp.2)
     }
@@ -53,7 +53,7 @@ k_means <- function(dat, k, pca = FALSE) {
             stop <-  1
         }
 
-        SSTO = sum(dists^2)
+        SSTO = round(sum(dists^2))
 
         last_vec <- cluster_vec
 
@@ -68,8 +68,6 @@ k_means <- function(dat, k, pca = FALSE) {
 
     list <- list('Clustering vector' = cluster_vec, 'SSTO' = SSTO)
     return(list)
-
 }
-
 
 
