@@ -40,12 +40,12 @@ k_means <- function(dat, k, pca = FALSE) {
             i_cluster <- dist[1:k] %>%
                 which.min()
 
-            dist <- dist[1:k] %>%
+            d_min <- dist[1:k] %>%
                 min()
 
             cluster_vec[i] <- i_cluster
 
-            dists[i] <- dist
+            d_mins[i] <- d_min
 
         }
 
@@ -53,7 +53,7 @@ k_means <- function(dat, k, pca = FALSE) {
             stop <-  1
         }
 
-        SSTO = round(sum(dists^2))
+        SSTO = round(sum(d_mins^2))
 
         last_vec <- cluster_vec
 
