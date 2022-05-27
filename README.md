@@ -25,7 +25,7 @@ library(clust431)
 ## basic example code
 ```
 
-### k_means Without PCA
+**k_means Without PCA**
 
 The k_means function takes in a dataframe of numeric variables, so we
 first remove the *Species* column of the iris dataset. For this example,
