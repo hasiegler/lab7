@@ -89,5 +89,4 @@ clean_merges <- function(merges, n) {
 
 }
 
-hier_clust(mtcars, 3)
 
