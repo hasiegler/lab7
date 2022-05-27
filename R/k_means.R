@@ -14,7 +14,7 @@ k_means <- function(dat, k, pca = FALSE) {
         dat = princomp(dat)
         dat = dat$scores %>%
             as.data.frame() %>%
-            dplyr::select(Comp.1, Comp.2)
+            select(Comp.1, Comp.2)
     }
 
     rand <- sample(1:nrow(dat), k)
