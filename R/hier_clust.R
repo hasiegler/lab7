@@ -10,6 +10,7 @@
 #'
 #' @export
 hier_clust <- function(dat, k) {
+    names <- rownames(dat)
 
     merges <- data.frame(one = as.numeric(),
                          two = as.numeric())
@@ -37,23 +38,17 @@ hier_clust <- function(dat, k) {
         as.matrix()
     result <- cutree(res, k)
 
+    names(result) <- names
+
     return(result)
 }
 
-#' Edits the Merges Dataframe to be Compatible with cutree()
-#'
-#' @param merges A dataframe of the merges at each step
-#' @n Number of rows in the orginal dataframe that is being clusterd
-#'
-#' @return A dataframe of merges at each step with positive
-#' numbers representing a merge with a cluster formed at that row
-#'
-#' @import dplyr
+
 
 clean_merges <- function(merges, n) {
 
     merges_clean <- data.frame(one = as.numeric(),
-                           two = as.numeric())
+                               two = as.numeric())
 
     merges_clean[1,] <- merges[1,]
 
@@ -93,4 +88,6 @@ clean_merges <- function(merges, n) {
     return(merges_clean)
 
 }
+
+hier_clust(mtcars, 3)
 
