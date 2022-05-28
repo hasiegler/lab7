@@ -2,17 +2,18 @@
 % Please edit documentation in R/hier_clust.R
 \name{clean_merges}
 \alias{clean_merges}
-\title{Edits the Merges Dataframe to be Compatible with cutree()}
+\title{Cleans the merges dataframe to be compatible with cutree function}
 \usage{
 clean_merges(merges, n)
 }
 \arguments{
-\item{merges}{A dataframe of the merges at each step}
+\item{merges}{Dataframe of cluster merges by step}
+
+\item{n}{Number of rows in original dataframe}
 }
 \value{
-A dataframe of merges at each step with positive
-numbers representing a merge with a cluster formed at that row
+A dataframe of cleaned merges by step
 }
 \description{
-Edits the Merges Dataframe to be Compatible with cutree()
+Cleans the merges dataframe to be compatible with cutree function
 }

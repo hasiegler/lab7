@@ -8,6 +8,8 @@ hier_clust(dat, k)
 }
 \arguments{
 \item{dat}{A Data Frame}
+
+\item{k}{Number of Clusters to Return the Assignments at}
 }
 \value{
 A Vector of Cluster Assignments

@@ -1,12 +1,11 @@
 #' Clusters observations into groups using agglomerative hierarchical clustering
 #'
 #' @param dat A Data Frame
-#' @k Number of Clusters to Return the Assignments at
+#' @param k Number of Clusters to Return the Assignments at
 #'
 #' @return A Vector of Cluster Assignments
 #'
 #' @import dplyr
-#'
 #'
 #' @export
 hier_clust <- function(dat, k) {
@@ -43,8 +42,14 @@ hier_clust <- function(dat, k) {
     return(result)
 }
 
-
-
+#' Cleans the merges dataframe to be compatible with cutree function
+#'
+#' @param merges Dataframe of cluster merges by step
+#' @param n Number of rows in original dataframe
+#'
+#' @return A dataframe of cleaned merges by step
+#'
+#' @import dplyr
 clean_merges <- function(merges, n) {
 
     merges_clean <- data.frame(one = as.numeric(),

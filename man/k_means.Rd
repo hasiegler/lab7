@@ -4,7 +4,7 @@
 \alias{k_means}
 \title{Clusters observations into groups using kmeans clustering}
 \usage{
-k_means(dat, k)
+k_means(dat, k, pca = FALSE)
 }
 \arguments{
 \item{dat}{A Data Frame}
