@@ -23,7 +23,7 @@ k_means <- function(dat, k, pca = FALSE) {
 
     cluster_vec <- c()
     last_vec <- c(0)
-    dists <- c()
+    d_mins <- c()
     iter <- 0
     stop <- 0
 
